@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookReviewerRestApi.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookReviewerRestApi
 {
@@ -8,5 +9,6 @@ namespace BookReviewerRestApi
         {
 
         }
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 }
