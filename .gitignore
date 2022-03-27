@@ -9,6 +9,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+BookReviewerRestApi/appsettings.Development.json
+
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
