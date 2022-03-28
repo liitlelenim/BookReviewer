@@ -13,7 +13,8 @@ namespace BookReviewerRestApi.Entities
         public string Title { get; set; } = String.Empty;
         [StringLength(1024)]
         public string Author { get; set; } = String.Empty;
+        public string CoverImageUrl { get; set; } = String.Empty;
 
-        public ICollection<AppUser> ReadBy { get; set; } = new List<AppUser>();
+        public IEnumerable<AppUser> ReadBy { get; set; } = new List<AppUser>();
     }
 }
