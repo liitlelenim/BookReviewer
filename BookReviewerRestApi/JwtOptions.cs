@@ -14,5 +14,6 @@
             Issuer = configuration["Jwt:Issuer"];
             Subject = configuration["Jwt:Subject"];
         }
+        public JwtOptions() { }
     }
 }
