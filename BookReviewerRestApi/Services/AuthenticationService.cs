@@ -27,7 +27,7 @@ namespace BookReviewerRestApi.Services
             AppUser user = _appUserRepository.GetByUsername(loginDto.Username);
             if (BCryptHashing.Verify(loginDto.Password, user.PasswordHash))
             {
-                return CreateJwt(user.Username);
+                return CreateJwt(user.Username, user.Role.ToString());
             }
             throw new ArgumentException("Incorrect username or password.");
         }
@@ -56,7 +56,7 @@ namespace BookReviewerRestApi.Services
             _appUserRepository.Save();
         }
 
-        public string CreateJwt(string username)
+        public string CreateJwt(string username, string role)
         {
             return JwtBuilder.Create()
                 .WithAlgorithm(new HMACSHA256Algorithm())
@@ -66,6 +66,7 @@ namespace BookReviewerRestApi.Services
                 .AddClaim("sub", _jwtOptions.Subject)
                 .AddClaim("aud", _jwtOptions.Audience)
                 .AddClaim("username", username)
+                .AddClaim("role", role)
                 .Encode();
         }
     }
@@ -74,6 +75,6 @@ namespace BookReviewerRestApi.Services
     {
         public string Login(LoginDto loginDto);
         public void Register(AccountRegistrationDto registrationDto);
-        public string CreateJwt(string username);
+        public string CreateJwt(string username, string role);
     }
 }

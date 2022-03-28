@@ -22,6 +22,7 @@ namespace BookReviewerRestApi.Entities
     public enum UserRole
     {
         User,
-        Moderator
+        Moderator,
+        Administrator
     }
 }
