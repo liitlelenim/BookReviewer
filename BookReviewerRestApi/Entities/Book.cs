@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DEDrake;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookReviewerRestApi.Entities
 {
@@ -6,7 +7,8 @@ namespace BookReviewerRestApi.Entities
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
+        public string Uri { get; init; } = ShortGuid.NewGuid();
         [Required, StringLength(1024)]
         public string Title { get; set; } = String.Empty;
         [StringLength(1024)]
