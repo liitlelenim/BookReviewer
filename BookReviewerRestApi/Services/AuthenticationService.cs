@@ -62,9 +62,6 @@ namespace BookReviewerRestApi.Services
                 .WithAlgorithm(new HMACSHA256Algorithm())
                 .WithSecret(_jwtOptions.Secret)
                 .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
-                .AddClaim("iss", _jwtOptions.Issuer)
-                .AddClaim("sub", _jwtOptions.Subject)
-                .AddClaim("aud", _jwtOptions.Audience)
                 .AddClaim("username", username)
                 .AddClaim("role", role)
                 .Encode();
