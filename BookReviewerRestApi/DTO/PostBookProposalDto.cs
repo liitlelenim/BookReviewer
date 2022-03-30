@@ -10,8 +10,7 @@ namespace BookReviewerRestApi.DTO
         public string BookAuthorFullName { get; set; } = String.Empty;
 
         public string BookCoverUrl { get; set; } = String.Empty;
-        [Required]
-        public string ProposedByUsername = String.Empty;
+
     }
 
 }

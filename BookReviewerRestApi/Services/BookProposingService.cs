@@ -17,7 +17,7 @@ namespace BookReviewerRestApi.Services
             _appUserRepository = appUserRepository;
         }
 
-        public void AddBookProposal(PostBookProposalDto dto)
+        public void AddBookProposal(PostBookProposalDto dto, string username)
         {
             BookProposal proposal = new BookProposal
             {
@@ -25,12 +25,12 @@ namespace BookReviewerRestApi.Services
                 BookDescription = dto.BookDescription,
                 BookAuthorFullName = dto.BookAuthorFullName,
                 BookCoverUrl = dto.BookCoverUrl,
-                ProposedByUser = _appUserRepository.GetByUsername(dto.ProposedByUsername)
+                ProposedByUser = _appUserRepository.GetByUsername(username)
             };
             _bookProposalRepository.Insert(proposal);
             _bookProposalRepository.Save();
         }
-        public void AcceptBookProposal(int bookProposalId, PostBookDto postBookDto)
+        public Book AcceptBookProposal(int bookProposalId, PostBookDto postBookDto)
         {
             BookProposal proposal = _bookProposalRepository.GetById(bookProposalId);
             if (proposal.Status != BookProposalStatus.Pending)
@@ -49,6 +49,10 @@ namespace BookReviewerRestApi.Services
             _bookRepository.Save();
 
             proposal.Status = BookProposalStatus.Accepted;
+            _bookProposalRepository.MarkForUpdate(proposal);
+            _bookProposalRepository.Save();
+
+            return book;
 
         }
         public void RejectBookProposal(int bookProposalId)
@@ -60,13 +64,16 @@ namespace BookReviewerRestApi.Services
             }
 
             proposal.Status = BookProposalStatus.Rejected;
+            _bookProposalRepository.MarkForUpdate(proposal);
+            _bookProposalRepository.Save();
+
         }
     }
 
     public interface IBookProposingService
     {
-        public void AddBookProposal(PostBookProposalDto dto);
-        public void AcceptBookProposal(int bookProposalId, PostBookDto postBookDto);
+        public void AddBookProposal(PostBookProposalDto dto, string username);
+        public Book AcceptBookProposal(int bookProposalId, PostBookDto postBookDto);
         public void RejectBookProposal(int bookProposalId);
     }
 }

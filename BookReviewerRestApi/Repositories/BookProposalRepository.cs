@@ -19,7 +19,9 @@ namespace BookReviewerRestApi.Repositories
 
         public IEnumerable<BookProposal> GetPending()
         {
-            return _context.BookProposals.Where(proposal => proposal.Status == BookProposalStatus.Pending);
+
+            return _context.BookProposals.Where(proposal => proposal.Status == BookProposalStatus.Pending)
+                .Include(proposal => proposal.ProposedByUser);
         }
 
         public BookProposal GetById(int id)

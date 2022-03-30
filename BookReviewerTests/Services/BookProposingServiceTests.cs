@@ -24,7 +24,6 @@ namespace BookReviewerTests.Services
             var postBookProposalDtoStub = new PostBookProposalDto()
             {
                 BookAuthorFullName = "StubTitle",
-                ProposedByUsername = "stub"
             };
 
             var bookProposingRepositoryStub = new Mock<IBookProposalRepository>();
@@ -37,7 +36,7 @@ namespace BookReviewerTests.Services
             (bookProposingRepositoryStub.Object,
                 bookRepositoryStub.Object,
                 userRepositoryStub.Object);
-            Action addProposalAction = () => service.AddBookProposal(postBookProposalDtoStub);
+            Action addProposalAction = () => service.AddBookProposal(postBookProposalDtoStub, "stub");
             addProposalAction.Should().NotThrow();
         }
 
