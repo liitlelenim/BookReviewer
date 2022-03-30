@@ -1,4 +1,5 @@
 using BookReviewerRestApi;
+using BookReviewerRestApi.DAL;
 using BookReviewerRestApi.Repositories;
 using BookReviewerRestApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("temporaryTestDatabase"));
+builder.Services.AddTransient<DebugDataSeeder>();
+
 builder.Services.AddSingleton<JwtOptions>();
 
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
@@ -67,6 +70,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<DebugDataSeeder>();
+        service.Seed();
+    }
     app.UseSwagger();
     app.UseSwaggerUI();
 }
