@@ -14,7 +14,7 @@ namespace BookReviewerRestApi.Entities
         [Required]
         public BookProposalStatus Status { get; set; } = BookProposalStatus.Pending;
         [Required]
-        public AppUser ProposedBy { get; set; }
+        public AppUser ProposedByUser { get; set; }
 
 
     }

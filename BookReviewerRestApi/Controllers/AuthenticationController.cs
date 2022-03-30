@@ -31,6 +31,7 @@ namespace BookReviewerRestApi.Controllers
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
+
             try
             {
                 return Ok(_authenticationService.Login(loginDto));

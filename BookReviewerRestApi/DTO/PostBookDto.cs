@@ -1,14 +1,9 @@
-﻿using DEDrake;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookReviewerRestApi.Entities
+namespace BookReviewerRestApi.DTO
 {
-    public class Book
+    public class PostBookDto
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Uri { get; init; } = ShortGuid.NewGuid();
         [Required, StringLength(1024)]
         public string Title { get; set; } = String.Empty;
         [StringLength(10024)]
@@ -16,7 +11,5 @@ namespace BookReviewerRestApi.Entities
         [StringLength(1024)]
         public string Author { get; set; } = String.Empty;
         public string CoverImageUrl { get; set; } = String.Empty;
-
-        public IEnumerable<AppUser> ReadBy { get; set; } = new List<AppUser>();
     }
 }
