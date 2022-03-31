@@ -1,4 +1,5 @@
 ﻿using BookReviewerRestApi.DTO;
+using BookReviewerRestApi.Entities;
 using BookReviewerRestApi.Repositories;
 using BookReviewerRestApi.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,7 @@ namespace BookReviewerRestApi.Controllers
             _bookProposingService = bookProposingService;
         }
 
-        [HttpGet, Route("pending"), Authorize(Roles = "Moderator,Administrator")]
+        [HttpGet, Route("pending"), Authorize(Roles = UserRoleString.AdministratorOrModerator)]
         public ActionResult<IEnumerable<GetBookProposalDto>> GetPendingBookProposals()
         {
             return Ok(_bookProposalRepository.GetPending().Select(proposal => new GetBookProposalDto
@@ -48,7 +49,7 @@ namespace BookReviewerRestApi.Controllers
             }
         }
 
-        [HttpPost, Route("{id:int}/accept"), Authorize(Roles = "Moderator,Administrator")]
+        [HttpPost, Route("{id:int}/accept"), Authorize(Roles = UserRoleString.AdministratorOrModerator)]
         public ActionResult AcceptBookProposal(int id, [FromBody] PostBookDto postBookDto)
         {
             try
@@ -62,7 +63,7 @@ namespace BookReviewerRestApi.Controllers
             }
         }
 
-        [HttpDelete, Route("{id:int}/reject"), Authorize(Roles = "Moderator,Administrator")]
+        [HttpDelete, Route("{id:int}/reject"), Authorize(Roles = UserRoleString.AdministratorOrModerator)]
         public ActionResult AcceptBookProposal(int id)
         {
             try

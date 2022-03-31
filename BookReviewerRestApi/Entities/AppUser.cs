@@ -25,4 +25,12 @@ namespace BookReviewerRestApi.Entities
         Moderator,
         Administrator
     }
+
+    public static class UserRoleString
+    {
+        public const string User = "User";
+        public const string Moderator = "Moderator";
+        public const string Administrator = "Administrator";
+        public const string AdministratorOrModerator = "Administrator,Moderator";
+    }
 }

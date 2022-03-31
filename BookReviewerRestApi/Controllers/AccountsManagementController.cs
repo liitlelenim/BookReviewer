@@ -16,7 +16,7 @@ namespace BookReviewerRestApi.Controllers
             _accountManagementService = accountManagementService;
         }
 
-        [HttpPut, Route("{username}/role"), Authorize(Roles = "Administrator")]
+        [HttpPut, Route("{username}/role"), Authorize(Roles = UserRoleString.Administrator)]
         public ActionResult SetUserRole(string username, [FromBody] UserRole role)
         {
             try
@@ -31,7 +31,7 @@ namespace BookReviewerRestApi.Controllers
 
         }
 
-        [HttpDelete, Route("{username}"), Authorize(Roles = "Administrator")]
+        [HttpDelete, Route("{username}"), Authorize(Roles = UserRoleString.Administrator)]
         public ActionResult RemoveAnotherUserAccount(string username)
         {
             try
