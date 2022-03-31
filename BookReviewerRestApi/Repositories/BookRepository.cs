@@ -39,6 +39,11 @@ namespace BookReviewerRestApi.Repositories
             return book;
         }
 
+        public IEnumerable<Book> GetPaged(int page, int pageSize = 10)
+        {
+            return _context.Books.Skip((page - 1) * pageSize).Take(pageSize).Include(book => book.ReadBy);
+        }
+
         public void Insert(Book book)
         {
             _context.Books.Add(book);
@@ -65,7 +70,7 @@ namespace BookReviewerRestApi.Repositories
         public IEnumerable<Book> GetAll();
         public Book GetById(int id);
         public Book GetByUri(string uri);
-
+        public IEnumerable<Book> GetPaged(int page, int pageSize = 10);
         public void Insert(Book book);
         public void Remove(Book book);
         public void MarkForUpdate(Book book);

@@ -32,6 +32,5 @@ namespace BookReviewerRestApi.Services
     {
         public void RemoveAccount(string username);
         public void SetAccountRole(string username, UserRole role);
-
     }
 }
