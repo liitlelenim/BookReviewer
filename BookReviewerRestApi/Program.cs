@@ -18,6 +18,7 @@ builder.Services.AddSingleton<JwtOptions>();
 
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IAccountManagementService, AccountManagementService>();
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
