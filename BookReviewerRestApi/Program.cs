@@ -1,3 +1,4 @@
+using System.Text;
 using BookReviewerRestApi;
 using BookReviewerRestApi.DAL;
 using BookReviewerRestApi.Repositories;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +24,9 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddScoped<IBookProposalRepository, BookProposalRepository>();
 builder.Services.AddScoped<IBookProposingService, BookProposingService>();
+
+builder.Services.AddScoped<IUserBooksRepository, UserBooksRepository>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -43,7 +46,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -53,15 +55,18 @@ builder.Services.AddSwaggerGen(c =>
         BearerFormat = "JWT",
         Scheme = "Bearer"
     });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
         {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            new string[] { }
         }
     });
 });
@@ -77,6 +82,7 @@ if (app.Environment.IsDevelopment())
         var service = scope.ServiceProvider.GetService<DebugDataSeeder>();
         service.Seed();
     }
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }

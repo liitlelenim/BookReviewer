@@ -4,6 +4,7 @@ using BookReviewerRestApi.Repositories;
 using JWT.Algorithms;
 using JWT.Builder;
 using BCryptHashing = BCrypt.Net.BCrypt;
+
 namespace BookReviewerRestApi.Services
 {
     public class AuthenticationService : IAuthenticationService
@@ -29,6 +30,7 @@ namespace BookReviewerRestApi.Services
             {
                 return CreateJwt(user.Username, user.Role.ToString());
             }
+
             throw new ArgumentException("Incorrect username or password.");
         }
 
@@ -38,20 +40,26 @@ namespace BookReviewerRestApi.Services
             {
                 throw new ArgumentException("Password and confirmation password do not match.");
             }
+
             if (registrationDto.Username.Length < 3)
             {
                 throw new ArgumentException("Username must be at least 3 characters long.");
             }
+
             if (_appUserRepository.ExistByUsername(registrationDto.Username))
             {
                 throw new ArgumentException("Username is already taken.");
             }
+
             if (registrationDto.Password.Length < 6)
             {
                 throw new ArgumentException("Password must be at least 6 characters long.");
             }
 
-            AppUser user = new AppUser() { Username = registrationDto.Username, PasswordHash = BCryptHashing.HashPassword(registrationDto.Password) };
+            AppUser user = new AppUser()
+            {
+                Username = registrationDto.Username, PasswordHash = BCryptHashing.HashPassword(registrationDto.Password)
+            };
             _appUserRepository.Insert(user);
             _appUserRepository.Save();
         }
