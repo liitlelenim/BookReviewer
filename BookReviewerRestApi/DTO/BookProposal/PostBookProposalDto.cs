@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookReviewerRestApi.DTO
+namespace BookReviewerRestApi.DTO.BookProposal
 {
     public class PostBookProposalDto
     {

@@ -1,4 +1,5 @@
 ﻿using BookReviewerRestApi.DTO;
+using BookReviewerRestApi.DTO.BookProposal;
 using BookReviewerRestApi.Entities;
 using BookReviewerRestApi.Repositories;
 using BookReviewerRestApi.Services;

@@ -1,4 +1,4 @@
-﻿namespace BookReviewerRestApi.DTO
+﻿namespace BookReviewerRestApi.DTO.BookProposal
 {
     public class GetBookProposalDto
     {

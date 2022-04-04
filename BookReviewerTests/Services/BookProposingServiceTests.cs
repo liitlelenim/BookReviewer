@@ -5,6 +5,7 @@ using BookReviewerRestApi.Services;
 using FluentAssertions;
 using Moq;
 using System;
+using BookReviewerRestApi.DTO.BookProposal;
 using Xunit;
 
 namespace BookReviewerTests.Services
