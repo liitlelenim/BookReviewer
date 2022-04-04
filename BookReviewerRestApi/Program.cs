@@ -26,6 +26,7 @@ builder.Services.AddScoped<IBookProposalRepository, BookProposalRepository>();
 builder.Services.AddScoped<IBookProposingService, BookProposingService>();
 
 builder.Services.AddScoped<IUserBooksRepository, UserBooksRepository>();
+builder.Services.AddScoped<IUserBooksService, UserBooksService>();
 
 builder.Services.AddControllers();
 
