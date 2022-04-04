@@ -28,14 +28,15 @@ public class UserBooksRepository : IUserBooksRepository
 
     public AppUser GetUserByUsernameWithBooks(string username)
     {
-        AppUser? user = _context.AppUsers
-            .Include(user => user.ReadBooks)
-            .SingleOrDefault(user => user.Username == username);
+        AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Username == username);
         if (user is null)
         {
             throw new ArgumentException("User with given username does not exist.");
         }
 
+        _context.Entry(user)
+            .Collection(u => u.ReadBooks)
+            .Load();
         return user;
     }
 

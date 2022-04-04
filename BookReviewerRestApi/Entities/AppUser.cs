@@ -11,8 +11,8 @@ namespace BookReviewerRestApi.Entities
         [Required] public string PasswordHash { get; set; } = String.Empty;
         [Required] public UserRole Role { get; set; } = UserRole.User;
 
-        public List<Book> ReadBooks = new List<Book>();
-        public IEnumerable<Review> Reviews = new List<Review>();
+        public List<Book> ReadBooks { get; set; } = new List<Book>();
+        public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
     }
 
     public enum UserRole
