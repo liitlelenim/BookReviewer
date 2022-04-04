@@ -1,4 +1,5 @@
-﻿using BookReviewerRestApi.Entities;
+﻿using BookReviewerRestApi.DAL;
+using BookReviewerRestApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookReviewerRestApi.Repositories
