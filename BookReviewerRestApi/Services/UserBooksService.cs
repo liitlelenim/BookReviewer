@@ -5,9 +5,9 @@ namespace BookReviewerRestApi.Services;
 
 public class UserBooksService : IUserBooksService
 {
-    private readonly UserBooksRepository _userBooksRepository;
+    private readonly IUserBooksRepository _userBooksRepository;
 
-    public UserBooksService(UserBooksRepository userBooksRepository)
+    public UserBooksService(IUserBooksRepository userBooksRepository)
     {
         _userBooksRepository = userBooksRepository;
     }
