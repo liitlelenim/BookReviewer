@@ -19,7 +19,6 @@ namespace BookReviewerRestApi.Controllers
 
         [HttpGet]
         [Authorize(Roles = UserRoleString.AdministratorOrModerator)]
-
         public ActionResult<IEnumerable<Book>> GetAllBooks()
         {
             return Ok(_bookRepository.GetAll());

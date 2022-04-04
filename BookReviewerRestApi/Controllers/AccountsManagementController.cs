@@ -28,7 +28,6 @@ namespace BookReviewerRestApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete, Route("{username}"), Authorize(Roles = UserRoleString.Administrator)]
@@ -44,6 +43,7 @@ namespace BookReviewerRestApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpDelete, Authorize]
         public ActionResult RemoveYourAccount()
         {
@@ -57,7 +57,5 @@ namespace BookReviewerRestApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
     }
 }

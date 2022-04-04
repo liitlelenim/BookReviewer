@@ -8,6 +8,9 @@
         {
             Secret = configuration["Jwt:Secret"];
         }
-        public JwtOptions() { }
+
+        public JwtOptions()
+        {
+        }
     }
 }

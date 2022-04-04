@@ -11,7 +11,8 @@ namespace BookReviewerRestApi.Services
         private readonly IBookRepository _bookRepository;
         private readonly IAppUserRepository _appUserRepository;
 
-        public BookProposingService(IBookProposalRepository bookProposalRepository, IBookRepository bookRepository, IAppUserRepository appUserRepository)
+        public BookProposingService(IBookProposalRepository bookProposalRepository, IBookRepository bookRepository,
+            IAppUserRepository appUserRepository)
         {
             _bookProposalRepository = bookProposalRepository;
             _bookRepository = bookRepository;
@@ -31,6 +32,7 @@ namespace BookReviewerRestApi.Services
             _bookProposalRepository.Insert(proposal);
             _bookProposalRepository.Save();
         }
+
         public Book AcceptBookProposal(int bookProposalId, PostBookDto postBookDto)
         {
             BookProposal proposal = _bookProposalRepository.GetById(bookProposalId);
@@ -54,8 +56,8 @@ namespace BookReviewerRestApi.Services
             _bookProposalRepository.Save();
 
             return book;
-
         }
+
         public void RejectBookProposal(int bookProposalId)
         {
             BookProposal proposal = _bookProposalRepository.GetById(bookProposalId);
@@ -67,7 +69,6 @@ namespace BookReviewerRestApi.Services
             proposal.Status = BookProposalStatus.Rejected;
             _bookProposalRepository.MarkForUpdate(proposal);
             _bookProposalRepository.Save();
-
         }
     }
 

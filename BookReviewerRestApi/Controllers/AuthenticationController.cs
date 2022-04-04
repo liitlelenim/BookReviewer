@@ -28,6 +28,7 @@ namespace BookReviewerRestApi.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {

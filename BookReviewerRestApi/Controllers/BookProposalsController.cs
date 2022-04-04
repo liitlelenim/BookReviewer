@@ -15,7 +15,8 @@ namespace BookReviewerRestApi.Controllers
         private readonly IBookProposalRepository _bookProposalRepository;
         private readonly IBookProposingService _bookProposingService;
 
-        public BookProposalsController(IBookProposalRepository bookProposalRepository, IBookProposingService bookProposingService)
+        public BookProposalsController(IBookProposalRepository bookProposalRepository,
+            IBookProposingService bookProposingService)
         {
             _bookProposalRepository = bookProposalRepository;
             _bookProposingService = bookProposingService;
@@ -40,7 +41,6 @@ namespace BookReviewerRestApi.Controllers
         {
             try
             {
-
                 _bookProposingService.AddBookProposal(postBookProposalDto, User.FindFirst("username").Value);
                 return NoContent();
             }

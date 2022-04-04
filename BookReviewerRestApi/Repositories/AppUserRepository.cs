@@ -25,6 +25,7 @@ namespace BookReviewerRestApi.Repositories
             {
                 throw new ArgumentException("User with given id does not exist.");
             }
+
             return user;
         }
 
@@ -35,6 +36,7 @@ namespace BookReviewerRestApi.Repositories
             {
                 throw new ArgumentException("User with given uri does not exist.");
             }
+
             return user;
         }
 
@@ -45,6 +47,7 @@ namespace BookReviewerRestApi.Repositories
             {
                 throw new ArgumentException("User with given username does not exist.");
             }
+
             return user;
         }
 

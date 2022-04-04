@@ -76,6 +76,5 @@ namespace BookReviewerRestApi.Repositories
         public void Remove(Book book);
         public void MarkForUpdate(Book book);
         public void Save();
-
     }
 }

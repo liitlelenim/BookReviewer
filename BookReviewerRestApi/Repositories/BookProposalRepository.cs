@@ -20,7 +20,6 @@ namespace BookReviewerRestApi.Repositories
 
         public IEnumerable<BookProposal> GetPending()
         {
-
             return _context.BookProposals.Where(proposal => proposal.Status == BookProposalStatus.Pending)
                 .Include(proposal => proposal.ProposedByUser);
         }
@@ -32,6 +31,7 @@ namespace BookReviewerRestApi.Repositories
             {
                 throw new ArgumentException("Book proposal with given id does not exist");
             }
+
             return proposal;
         }
 
@@ -65,7 +65,5 @@ namespace BookReviewerRestApi.Repositories
         public void MarkForUpdate(BookProposal bookProposal);
         public void Remove(BookProposal bookProposal);
         public void Save();
-
-
     }
 }
