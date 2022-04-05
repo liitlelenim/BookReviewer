@@ -78,7 +78,12 @@ public class ReviewsService : IReviewsService
     {
         Book book = _bookRepository.GetByUri(bookUri);
         IEnumerable<Review> reviews  = _reviewRepository.GetReviewsByBook(book);
-        return Math.Round(reviews.Select(review => review.Rating).Average(),2);
+        if (reviews.Any())
+        {
+            return Math.Round(reviews.Select(review => review.Rating).Average(), 2);
+        }
+
+        return 0;
     }
 
     public void RemoveReview(string uri)
