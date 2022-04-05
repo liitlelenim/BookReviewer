@@ -28,7 +28,8 @@ builder.Services.AddScoped<IBookProposingService, BookProposingService>();
 builder.Services.AddScoped<IUserBooksRepository, UserBooksRepository>();
 builder.Services.AddScoped<IUserBooksService, UserBooksService>();
 
-builder.Services.AddScoped<IReviewsRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewsService, ReviewsService>();
 
 builder.Services.AddControllers();
 
