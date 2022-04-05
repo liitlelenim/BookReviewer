@@ -28,6 +28,8 @@ builder.Services.AddScoped<IBookProposingService, BookProposingService>();
 builder.Services.AddScoped<IUserBooksRepository, UserBooksRepository>();
 builder.Services.AddScoped<IUserBooksService, UserBooksService>();
 
+builder.Services.AddScoped<IReviewsRepository, ReviewRepository>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -78,10 +80,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
-    using (var scope = scopedFactory.CreateScope())
+    using (var scope = scopedFactory?.CreateScope())
     {
-        var service = scope.ServiceProvider.GetService<DebugDataSeeder>();
-        service.Seed();
+        var service = scope?.ServiceProvider.GetService<DebugDataSeeder>();
+        service?.Seed();
     }
 
     app.UseSwagger();
