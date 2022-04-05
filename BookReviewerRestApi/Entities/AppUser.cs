@@ -12,7 +12,7 @@ namespace BookReviewerRestApi.Entities
         [Required] public UserRole Role { get; set; } = UserRole.User;
 
         public List<Book> ReadBooks { get; set; } = new List<Book>();
-        public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
+        public List<Review> Reviews { get; set; } = new List<Review>();
     }
 
     public enum UserRole

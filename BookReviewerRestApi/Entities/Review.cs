@@ -10,7 +10,7 @@ public class Review
     [Range(1,5)] public int Rating { get; set; }
     [StringLength(10024)] public string Content { get; set; } = String.Empty;
     public DateTime CreatedAt { get; init; } = DateTime.Now;
-    [Required] public Book? Book { get; init; }
-    [Required] public AppUser? User { get; init; }
+    [Required] public Book? Book { get; set; }
+    [Required] public AppUser? User { get; set; }
 }
 

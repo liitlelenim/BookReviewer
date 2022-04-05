@@ -86,9 +86,9 @@ public class ReviewsService : IReviewsService
         return 0;
     }
 
-    public void RemoveReview(string uri)
+    public void RemoveReview(string username, string bookUri)
     {
-        Review review = _reviewRepository.GetReviewByUri(uri);
+        Review review = _reviewRepository.GetReviewByUsernameAndBookUri(username,bookUri);
         _reviewRepository.RemoveReview(review);
         _reviewRepository.Save();
     }
@@ -100,5 +100,5 @@ public interface IReviewsService
     public IEnumerable<GetReviewDto> GetBookReviews(string bookUri);
     public GetReviewDto AddReviewToTheBook(string username, string bookUri, PostReviewDto dto);
     public double GetAverageBookRating(string bookUri);
-    public void RemoveReview(string uri);
+    public void RemoveReview(string username,string bookUri);
 }

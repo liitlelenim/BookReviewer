@@ -1,5 +1,6 @@
 using BookReviewerRestApi.DAL;
 using BookReviewerRestApi.Entities;
+using BookReviewerRestApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookReviewerRestApi.Repositories;
@@ -31,6 +32,32 @@ public class ReviewRepository : IReviewRepository
         return review;
     }
 
+    public Review GetReviewByUsernameAndBookUri(string username, string bookUri)
+    {
+        AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Username == username);
+        if (user is null)
+        {
+            throw new ArgumentException("User with given username does not exist.");
+        }
+
+        Book? book = _context.Books.SingleOrDefault(book => book.Uri == bookUri);
+        if (book is null)
+        {
+            throw new ArgumentException("Book with given uri does not exist");
+        }
+        
+        _context.Entry(user).Collection(u => u.ReadBooks).Load();
+        _context.Entry(user).Collection(u=>u.Reviews).Load();
+        _context.Books.Include(r => r.Reviews);
+        Review? review = user.Reviews.SingleOrDefault(review => review.Book == book);
+        if (review is null)
+        {
+            throw new ArgumentException("This user does not reviewed given book.");
+        }
+
+        return review;
+    }
+
     public void AddReviewToBook(Book book, Review review, AppUser author)
     {
         _context.Entry(author).Collection(user => user.ReadBooks).Load();
@@ -45,6 +72,9 @@ public class ReviewRepository : IReviewRepository
             throw new ArgumentException("This book has been already reviewed by given user.");
         }
         book.Reviews.Add(review);
+        author.Reviews.Add(review);
+        review.Book = book;
+        review.User = author;
     }
 
     public void RemoveReview(Review review)
@@ -67,6 +97,7 @@ public interface IReviewRepository
 {
     public IEnumerable<Review> GetReviewsByBook(Book book);
     public Review GetReviewByUri(string uri);
+    public Review GetReviewByUsernameAndBookUri(string username, string bookUri);
     public void AddReviewToBook(Book book, Review review, AppUser user);
     public void RemoveReview(Review review);
     public void MarkForUpdate(Review review);
