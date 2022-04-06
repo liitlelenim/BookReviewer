@@ -23,7 +23,7 @@ public class ReviewRepository : IReviewRepository
 
     public Review GetReviewByUri(string uri)
     {
-        Review? review = _context.Reviews.SingleOrDefault(r => r.Uri == uri);
+        Review? review = _context.Reviews.FirstOrDefault(r => r.Uri == uri);
         if (review is null)
         {
             throw new ArgumentException("Review with given uri does not exist.");
@@ -34,13 +34,13 @@ public class ReviewRepository : IReviewRepository
 
     public Review GetReviewByUsernameAndBookUri(string username, string bookUri)
     {
-        AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Username == username);
+        AppUser? user = _context.AppUsers.FirstOrDefault(user => user.Username == username);
         if (user is null)
         {
             throw new ArgumentException("User with given username does not exist.");
         }
 
-        Book? book = _context.Books.SingleOrDefault(book => book.Uri == bookUri);
+        Book? book = _context.Books.FirstOrDefault(book => book.Uri == bookUri);
         if (book is null)
         {
             throw new ArgumentException("Book with given uri does not exist");
@@ -49,7 +49,7 @@ public class ReviewRepository : IReviewRepository
         _context.Entry(user).Collection(u => u.ReadBooks).Load();
         _context.Entry(user).Collection(u=>u.Reviews).Load();
         _context.Books.Include(r => r.Reviews);
-        Review? review = user.Reviews.SingleOrDefault(review => review.Book == book);
+        Review? review = user.Reviews.FirstOrDefault(review => review.Book == book);
         if (review is null)
         {
             throw new ArgumentException("This user does not reviewed given book.");
@@ -67,7 +67,7 @@ public class ReviewRepository : IReviewRepository
         } 
         _context.Entry(book).Collection(b =>b.Reviews ).Load();
         _context.Reviews.Include(r => r.User);
-        if (book.Reviews.SingleOrDefault(r => r.User == author) is not null)
+        if (book.Reviews.FirstOrDefault(r => r.User == author) is not null)
         {
             throw new ArgumentException("This book has been already reviewed by given user.");
         }

@@ -17,7 +17,7 @@ public class UserBooksRepository : IUserBooksRepository
     {
         AppUser? user = _context.AppUsers
             .Include(user => user.ReadBooks)
-            .SingleOrDefault(user => user.Id == id);
+            .FirstOrDefault(user => user.Id == id);
         if (user is null)
         {
             throw new ArgumentException("User with given id does not exist.");
@@ -28,7 +28,7 @@ public class UserBooksRepository : IUserBooksRepository
 
     public AppUser GetUserByUsernameWithBooks(string username)
     {
-        AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Username == username);
+        AppUser? user = _context.AppUsers.FirstOrDefault(user => user.Username == username);
         if (user is null)
         {
             throw new ArgumentException("User with given username does not exist.");
@@ -42,7 +42,7 @@ public class UserBooksRepository : IUserBooksRepository
 
     public void AddBookToUserCollection(AppUser user, string bookUri)
     {
-        Book? bookToAdd = _context.Books.SingleOrDefault(book => book.Uri == bookUri);
+        Book? bookToAdd = _context.Books.FirstOrDefault(book => book.Uri == bookUri);
         if (bookToAdd is null)
         {
             throw new ArgumentException("Book with given uri does not exist.");
@@ -53,7 +53,7 @@ public class UserBooksRepository : IUserBooksRepository
 
     public void RemoveBookFromUserCollection(AppUser user, string bookUri)
     {
-        Book? bookToRemove = _context.Books.SingleOrDefault(book => book.Uri == bookUri);
+        Book? bookToRemove = _context.Books.FirstOrDefault(book => book.Uri == bookUri);
         if (bookToRemove is null)
         {
             throw new ArgumentException("Book with given uri does not exist.");

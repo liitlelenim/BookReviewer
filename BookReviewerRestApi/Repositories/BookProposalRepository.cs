@@ -26,7 +26,7 @@ namespace BookReviewerRestApi.Repositories
 
         public BookProposal GetById(int id)
         {
-            BookProposal? proposal = _context.BookProposals.Find(id);
+            BookProposal? proposal = _context.BookProposals.FirstOrDefault(proposal => proposal.Id == id);
             if (proposal == null)
             {
                 throw new ArgumentException("Book proposal with given id does not exist");

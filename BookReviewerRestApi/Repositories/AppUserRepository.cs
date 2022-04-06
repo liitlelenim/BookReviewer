@@ -20,7 +20,7 @@ namespace BookReviewerRestApi.Repositories
 
         public AppUser GetById(int id)
         {
-            AppUser? user = _context.AppUsers.Find(id);
+            AppUser? user = _context.AppUsers.FirstOrDefault(user => user.Id == id);
             if (user == null)
             {
                 throw new ArgumentException("User with given id does not exist.");
@@ -31,7 +31,7 @@ namespace BookReviewerRestApi.Repositories
 
         public AppUser GetByUri(string uri)
         {
-            AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Uri == uri);
+            AppUser? user = _context.AppUsers.FirstOrDefault(user => user.Uri == uri);
             if (user == null)
             {
                 throw new ArgumentException("User with given uri does not exist.");
@@ -42,7 +42,7 @@ namespace BookReviewerRestApi.Repositories
 
         public AppUser GetByUsername(string username)
         {
-            AppUser? user = _context.AppUsers.SingleOrDefault(user => user.Username == username);
+            AppUser? user = _context.AppUsers.FirstOrDefault(user => user.Username == username);
             if (user == null)
             {
                 throw new ArgumentException("User with given username does not exist.");
@@ -53,7 +53,7 @@ namespace BookReviewerRestApi.Repositories
 
         public bool ExistByUsername(string username)
         {
-            return _context.AppUsers.SingleOrDefault(user => user.Username == username) != null;
+            return _context.AppUsers.FirstOrDefault(user => user.Username == username) != null;
         }
 
         public void Insert(AppUser user)

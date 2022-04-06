@@ -20,7 +20,7 @@ namespace BookReviewerRestApi.Repositories
 
         public Book GetById(int id)
         {
-            Book? book = _context.Books.Find(id);
+            Book? book = _context.Books.FirstOrDefault(book=>book.Id==id);
             if (book == null)
             {
                 throw new ArgumentException();
@@ -31,7 +31,7 @@ namespace BookReviewerRestApi.Repositories
 
         public Book GetByUri(string uri)
         {
-            Book? book = _context.Books.SingleOrDefault(book => book.Uri == uri);
+            Book? book = _context.Books.FirstOrDefault(book => book.Uri == uri);
             if (book == null)
             {
                 throw new ArgumentException();
