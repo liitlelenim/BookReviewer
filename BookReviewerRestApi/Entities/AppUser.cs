@@ -6,10 +6,10 @@ namespace BookReviewerRestApi.Entities
     public class AppUser
     {
         [Key] public int Id { get; init; }
-        [Required] public string Uri { get; init; } = ShortGuid.NewGuid();
-        [Required, StringLength(255)] public string Username { get; set; } = String.Empty;
-        [Required] public string PasswordHash { get; set; } = String.Empty;
-        [Required] public UserRole Role { get; set; } = UserRole.User;
+        public string Uri { get; init; } = ShortGuid.NewGuid();
+        [StringLength(255)] public string Username { get; set; } = String.Empty;
+        public string PasswordHash { get; set; } = String.Empty;
+        public UserRole Role { get; set; } = UserRole.User;
 
         public List<Book> ReadBooks { get; set; } = new List<Book>();
         public List<Review> Reviews { get; set; } = new List<Review>();
