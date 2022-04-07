@@ -1,6 +1,5 @@
 using BookReviewerRestApi.DAL;
 using BookReviewerRestApi.Entities;
-using BookReviewerRestApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookReviewerRestApi.Repositories;
@@ -28,6 +27,7 @@ public class ReviewRepository : IReviewRepository
         {
             throw new ArgumentException("Review with given uri does not exist.");
         }
+
         _context.Entry(review).Reference(r => r.User);
         return review;
     }
@@ -45,9 +45,9 @@ public class ReviewRepository : IReviewRepository
         {
             throw new ArgumentException("Book with given uri does not exist");
         }
-        
+
         _context.Entry(user).Collection(u => u.ReadBooks).Load();
-        _context.Entry(user).Collection(u=>u.Reviews).Load();
+        _context.Entry(user).Collection(u => u.Reviews).Load();
         _context.Books.Include(r => r.Reviews);
         Review? review = user.Reviews.FirstOrDefault(review => review.Book == book);
         if (review is null)
@@ -64,13 +64,15 @@ public class ReviewRepository : IReviewRepository
         if (!author.ReadBooks.Contains(book))
         {
             throw new ArgumentException("Author book collection does not contain given book");
-        } 
-        _context.Entry(book).Collection(b =>b.Reviews ).Load();
+        }
+
+        _context.Entry(book).Collection(b => b.Reviews).Load();
         _context.Reviews.Include(r => r.User);
         if (book.Reviews.FirstOrDefault(r => r.User == author) is not null)
         {
             throw new ArgumentException("This book has been already reviewed by given user.");
         }
+
         book.Reviews.Add(review);
         author.Reviews.Add(review);
         review.Book = book;
@@ -80,11 +82,6 @@ public class ReviewRepository : IReviewRepository
     public void RemoveReview(Review review)
     {
         _context.Reviews.Remove(review);
-    }
-
-    public void MarkForUpdate(Review review)
-    {
-        _context.Entry(review).State = EntityState.Modified;
     }
 
     public void Save()
@@ -100,6 +97,5 @@ public interface IReviewRepository
     public Review GetReviewByUsernameAndBookUri(string username, string bookUri);
     public void AddReviewToBook(Book book, Review review, AppUser user);
     public void RemoveReview(Review review);
-    public void MarkForUpdate(Review review);
     public void Save();
 }

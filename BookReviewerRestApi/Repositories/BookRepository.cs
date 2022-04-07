@@ -20,7 +20,7 @@ namespace BookReviewerRestApi.Repositories
 
         public Book GetById(int id)
         {
-            Book? book = _context.Books.FirstOrDefault(book=>book.Id==id);
+            Book? book = _context.Books.FirstOrDefault(book => book.Id == id);
             if (book == null)
             {
                 throw new ArgumentException();
@@ -55,10 +55,6 @@ namespace BookReviewerRestApi.Repositories
             _context.Books.Remove(book);
         }
 
-        public void MarkForUpdate(Book book)
-        {
-            _context.Entry(book).State = EntityState.Modified;
-        }
 
         public void Save()
         {
@@ -74,7 +70,6 @@ namespace BookReviewerRestApi.Repositories
         public IEnumerable<Book> GetPaged(int page, int pageSize = 10);
         public void Insert(Book book);
         public void Remove(Book book);
-        public void MarkForUpdate(Book book);
         public void Save();
     }
 }

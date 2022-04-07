@@ -52,7 +52,6 @@ namespace BookReviewerRestApi.Services
             _bookRepository.Save();
 
             proposal.Status = BookProposalStatus.Accepted;
-            _bookProposalRepository.MarkForUpdate(proposal);
             _bookProposalRepository.Save();
 
             return book;
@@ -67,7 +66,6 @@ namespace BookReviewerRestApi.Services
             }
 
             proposal.Status = BookProposalStatus.Rejected;
-            _bookProposalRepository.MarkForUpdate(proposal);
             _bookProposalRepository.Save();
         }
     }

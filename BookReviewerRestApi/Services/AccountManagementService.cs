@@ -23,7 +23,6 @@ namespace BookReviewerRestApi.Services
         {
             AppUser user = _appUserRepository.GetByUsername(username);
             user.Role = role;
-            _appUserRepository.MarkForUpdate(user);
             _appUserRepository.Save();
         }
     }

@@ -40,10 +40,6 @@ namespace BookReviewerRestApi.Repositories
             _context.BookProposals.Add(bookProposal);
         }
 
-        public void MarkForUpdate(BookProposal bookProposal)
-        {
-            _context.Entry(bookProposal).State = EntityState.Modified;
-        }
 
         public void Remove(BookProposal bookProposal)
         {
@@ -62,7 +58,6 @@ namespace BookReviewerRestApi.Repositories
         public IEnumerable<BookProposal> GetPending();
         public BookProposal GetById(int id);
         public void Insert(BookProposal bookProposal);
-        public void MarkForUpdate(BookProposal bookProposal);
         public void Remove(BookProposal bookProposal);
         public void Save();
     }

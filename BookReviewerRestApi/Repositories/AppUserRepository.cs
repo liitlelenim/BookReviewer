@@ -1,6 +1,5 @@
 ﻿using BookReviewerRestApi.DAL;
 using BookReviewerRestApi.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookReviewerRestApi.Repositories
 {
@@ -66,10 +65,6 @@ namespace BookReviewerRestApi.Repositories
             _context.AppUsers.Remove(GetById(id));
         }
 
-        public void MarkForUpdate(AppUser user)
-        {
-            _context.Entry(user).State = EntityState.Modified;
-        }
 
         public void Save()
         {
@@ -86,7 +81,6 @@ namespace BookReviewerRestApi.Repositories
         public bool ExistByUsername(string username);
         public void Insert(AppUser user);
         public void Remove(int id);
-        public void MarkForUpdate(AppUser user);
         public void Save();
     }
 }
